@@ -1,0 +1,11 @@
+query GetProfile {
+  UserQuery {
+    getProfile {
+      user {
+        name,
+        surname
+      }
+      phone
+    }
+  }
+}

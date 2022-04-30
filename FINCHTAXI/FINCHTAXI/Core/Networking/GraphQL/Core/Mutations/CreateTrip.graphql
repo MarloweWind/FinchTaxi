@@ -1,0 +1,7 @@
+mutation CreateTrip($request: InputCreateTripRequest!) {
+  TripMutation {
+    createTrip(request: $request){
+      tripId
+    }
+  }
+}

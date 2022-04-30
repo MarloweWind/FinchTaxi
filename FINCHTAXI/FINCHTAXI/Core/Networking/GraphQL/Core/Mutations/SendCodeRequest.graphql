@@ -1,0 +1,5 @@
+mutation SendCodeRequest($phone: String!) {
+  UserMutation {
+    sendCode(phone: $phone)
+  }
+}
