@@ -39,27 +39,30 @@ extension UserDataInteractor: UserDataInteractorInput {
     
     func updateProfile(name: String, surname: String) {
         
-        networkServies.mutate(mutation: UpdateProfileMutation(profile: InputUserProfile(name: name, surname: surname))) {
-            [weak self] (result: Result<UpdateProfileModel, GraphQLError>) in
-            
-            DispatchQueue.main.async {
-                switch result {
-                case .success(_):
-                    
-                    self?.presenter?.didUpdatedProfile()
-                    print("update profile success")
-                    
-                case .failure(let error):
-                    
-                    let errorModel = ErrorModel.custom(message: error.errorDescription)
-
-                    if error.errorDescription?.isEmpty != true {
-                        self?.presenter?.didFailToUpdateProfile(errorModel: errorModel)
-                    }
-
-                }
-            }
-        }
+//        networkServies.mutate(mutation: UpdateProfileMutation(profile: InputUserProfile(name: name, surname: surname))) {
+//            [weak self] (result: Result<UpdateProfileModel, GraphQLError>) in
+//
+//            DispatchQueue.main.async {
+//                switch result {
+//                case .success(_):
+//
+//                    self?.presenter?.didUpdatedProfile()
+//                    print("update profile success")
+//
+//                case .failure(let error):
+//
+//                    let errorModel = ErrorModel.custom(message: error.errorDescription)
+//
+//                    if error.errorDescription?.isEmpty != true {
+//                        self?.presenter?.didFailToUpdateProfile(errorModel: errorModel)
+//                    }
+//
+//                }
+//            }
+//        }
+        
+        presenter?.didUpdatedProfile()
+        
     }
     
     func getUserPhoto() -> UIImage? {

@@ -38,17 +38,20 @@ final class ProfileInteractor {
 extension ProfileInteractor: ProfileInteractorInput {
     
     func getUserProfile() {
-        networkServies.fetch(query: GetProfileQuery()) {
-            [weak self] (result: Result<GetProfileModel, GraphQLError>) in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let result):
-                    self?.presenter?.getProfile(profile: result.userQuery.getProfile)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
-        }
+//        networkServies.fetch(query: GetProfileQuery()) {
+//            [weak self] (result: Result<GetProfileModel, GraphQLError>) in
+//            DispatchQueue.main.async {
+//                switch result {
+//                case .success(let result):
+//                    self?.presenter?.getProfile(profile: result.userQuery.getProfile)
+//                case .failure(let error):
+//                    print(error.localizedDescription)
+//                }
+//            }
+//        }
+        
+        presenter?.getProfile(profile: GetProfile(user: User(name: "Иванов", surname: "Иван"), phone: userDefaults.userPhoneNumber ?? ""))
+        
     }
     
     var getUserPhoto: UIImage {

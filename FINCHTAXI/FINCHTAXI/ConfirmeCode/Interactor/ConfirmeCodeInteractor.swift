@@ -45,34 +45,40 @@ extension ConfirmeCodeInteractor: ConfirmeCodeInteractorInput {
             return
         }
         
-        networkServies.mutate(mutation: CondfirmCodeRequestMutation(phone: userPhone, code: code)) {
-            [weak self] (result: Result<ConfirmCodeModel, GraphQLError>) in
-            
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let result):
-                    
-                    self?.userDefaults.token = result.userMutation.confirmCode.token
-                    self?.presenter?.didConfirmCode()
-                        
-                    print("confirm login success")
-                    
-                case .failure(let error):
-                    
-                    let errorModel: ErrorModel
-                        
-                    if error.errorDescription?.isEmpty == false {
-                        errorModel = ErrorModel.wrongCodeAlert
-                    } else {
-                        errorModel = ErrorModel.custom(message: error.errorDescription)
-                    }
-                        
-                    self?.presenter?.didFailConfirmCode(errorModel: errorModel)
-                        
-                    print(error.localizedDescription)
-                    
-                }
-            }
+//        networkServies.mutate(mutation: CondfirmCodeRequestMutation(phone: userPhone, code: code)) {
+//            [weak self] (result: Result<c, GraphQLError>) in
+//
+//            DispatchQueue.main.async {
+//                switch result {
+//                case .success(let result):
+//
+//                    self?.userDefaults.token = result.userMutation.confirmCode.token
+//                    self?.presenter?.didConfirmCode()
+//
+//                    print("confirm login success")
+//
+//                case .failure(let error):
+//
+//                    let errorModel: ErrorModel
+//
+//                    if error.errorDescription?.isEmpty == false {
+//                        errorModel = ErrorModel.wrongCodeAlert
+//                    } else {
+//                        errorModel = ErrorModel.custom(message: error.errorDescription)
+//                    }
+//
+//                    self?.presenter?.didFailConfirmCode(errorModel: errorModel)
+//
+//                    print(error.localizedDescription)
+//
+//                }
+//            }
+//        }
+        if code == "0000" {
+            userDefaults.token = "userToken"
+            presenter?.didConfirmCode()
+        } else {
+            presenter?.didFailConfirmCode(errorModel: ErrorModel.wrongCodeAlert)
         }
         
     }
