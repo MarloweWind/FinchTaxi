@@ -25,7 +25,7 @@ final class PickCarView: UIView {
     
     weak var pickCarViewDelegate: PickCarViewOutput?
     
-    private var seatCount = 1
+    private var seatCount = 0
 
     let carLabel = UILabel()
     let carPriceLabel = UILabel()
@@ -80,6 +80,7 @@ final class PickCarView: UIView {
         minusButton.tintColor = .black
         minusButton.titleLabel?.font = UIFont(name: .medium, size: 12)
         minusButton.addTarget(self, action: #selector(didTapMinusButton), for: .touchUpInside)
+        minusButton.isEnabled = false
         
         plusButton.translatesAutoresizingMaskIntoConstraints = false
         plusButton.setTitle("+", for: .normal)
